@@ -25,7 +25,7 @@ async function tagAllCommand(sock, chatId, senderId, message) {
         }
 
         // Create message with each member on a new line
-        let messageText = '🔊 *Hello Everyone:*\n\n';
+        let messageText = '🔊 *𝑬𝑴𝑷𝑰𝑹𝑬 𝑨𝑲𝑨𝑻𝑺𝑼𝑲𝑰:*\n\n';
         participants.forEach(participant => {
             messageText += `@${participant.id.split('@')[0]}\n`; // Add \n for new line
         });
