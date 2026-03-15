@@ -4,78 +4,139 @@ const path = require('path');
 
 async function helpCommand(sock, chatId, message) {
     const helpMessage = `
-🌹 *BIENVENU DANS ${settings.botName || '∘̥⃟☠️𝑬𝑴𝑷𝑰𝑹𝑬 𝑨𝑲𝑨𝑻𝑺𝑼𝑲𝑰☠️∘̥⃟'}* 🌹
+🌹 *BIENVENU DANS ${settings.botName || 'EMPIRE AKATSUKI'}* 🌹
 🛠 Version: *${settings.version || '3.0.0'}*
 👑 Owner: *${settings.botOwner || 'Dev SHADOW'}*
 📺 YouTube: ${global.ytch}
 
 🦄𝑴𝑬𝑵𝑼 𝑬𝑴𝑷𝑰𝑹𝑬 𝑨𝑲𝑨𝑻𝑺𝑼𝑲𝑰🥷
-╔═══════════════════════════╗
+╔═════════════🥷══════════════╗
 🦋 *GENERAL AKATSUKI* 🦋
-🎯 .help | .menu
-🎯 .ping | .alive
-🎯 .tts <text> | .owner
-🎯 .joke | .quote | .fact
-🎯 .weather | .news
-🎯 .attp | .lyrics
-🎯 .8ball | .groupinfo
-🎯 .staff | .vv
-🎯 .trt | .ss | .jid | .url
-╚═══════════════════════════╝
-╔═══════════════════════════╗
+
+🎯 .help 
+🎯 .menu
+🎯 .ping 
+🎯 .alive
+🎯 .tts <text> 
+🎯 .owner
+🎯 .joke 
+🎯 .quote
+🎯 .fact
+🎯 .weather
+🎯 .news
+🎯 .attp 
+🎯 .lyrics
+🎯 .8ball 
+🎯 .groupinfo
+🎯 .staff 
+🎯 .vv
+🎯 .trt
+🎯 .ss
+🎯 .jid
+🎯 .url
+╚═════════════🥷══════════════╝
+╔═════════════🥷══════════════╗
 🦄 *ADMIN AKATSUKI* 🦄
-⚔️ .ban | .kick | .warn
-⚔️ .promote | .demote
-⚔️ .mute | .unmute
-⚔️ .delete | .clear
-⚔️ .tagall | .hidetag
-⚔️ .antilink | .antibadword
-⚔️ .welcome | .goodbye
-⚔️ .setgname | .setgpp
-╚═══════════════════════════╝
-╔═══════════════════════════╗
+
+⚔️ .ban 
+⚔️ .kick
+⚔️ .warn
+⚔️ .promote
+⚔️ .demote
+⚔️ .mute 
+⚔️ .unmute
+⚔️ .delete 
+⚔️ .clear
+⚔️ .tagall 
+⚔️ .hidetag
+⚔️ .antilink 
+⚔️ .antibadword
+⚔️ .welcome 
+⚔️ .goodbye
+⚔️ .setgname
+⚔️ .setgpp
+╚═════════════🥷══════════════╝
+╔═════════════🥷══════════════╗
 🔒 *OWNER AKATSUKI* 🔒
+
 👑 .mode <public/private>
-👑 .clearsession | .cleartmp
-👑 .update | .settings
-👑 .autostatus | .autoread
-👑 .anticall | .pmblocker
-👑 .setpp | .setmention
-╚═══════════════════════════╝
-╔═══════════════════════════╗
+👑 .clearsession 
+👑 .cleartmp
+👑 .update
+👑 .settings
+👑 .autostatus 
+👑 .autoread
+👑 .anticall 
+👑 .pmblocker
+👑 .setpp 
+👑 .setmention
+╚═════════════🥷══════════════╝
+╔═════════════🥷══════════════╗
 🎨 *EDITING* 🎨
-🖌️ .sticker | .simage
-🖌️ .remini | .removebg
-🖌️ .blur | .crop | .meme
-🖌️ .take | .emojimix
-🖌️ .igs | .igsc
-╚═══════════════════════════╝
-╔═══════════════════════════╗
+
+🎨 .sticker 
+🎨 .simage
+🎨 .remini 
+🎨 .removebg
+🎨 .blur 
+🎨 .crop
+🎨 .meme
+🎨 .take 
+🎨 .emojimix
+🎨 .igs
+🎨 .igsc
+╚══════════════🌹═════════════╝
+╔══════════════🌹═════════════╗
 🧠 *AI & GAMES* 🧠
-🤖 .gpt | .gemini
-🖼️ .imagine | .flux | .sora
-🎮 .tictactoe | .hangman
-🎮 .trivia | .truth | .dare
-╚═══════════════════════════╝
-╔═══════════════════════════╗
+
+🤖 .gpt 
+🤖 .gemini
+🖼️ .imagine
+🖼️ .flux
+🖼️ .sora
+🎮 .tictactoe
+🎮 .hangman
+🎮 .trivia 
+🎮 .truth
+🎮 .dare
+╚═════════════🌹══════════════╝
+╔═════════════🌹══════════════╗
 📥 *DOWNLOADER* 📥
-⬇️ .play | .song | .video
-⬇️ .spotify | .ytmp4
-⬇️ .instagram | .facebook
-⬇️ .tiktok
-╚═══════════════════════════╝
-╔═══════════════════════════╗
+
+📁 .play 
+📁 .song
+📁 .video
+📁 .spotify
+📁 .ytmp4
+📁 .instagram 
+📁 .facebook
+📁 .tiktok
+╚══════════════🌹═════════════╝
+╔══════════════🌹═════════════╗
 🔤 *TEXTMAKER* 🔤
-✏️ .neon | .glitch | .fire
-✏️ .ice | .snow | .matrix
-✏️ .hacker | .devil | .sand
-╚═══════════════════════════╝
-╔═══════════════════════════╗
-💻 *SYSTEM* 💻
-💾 .git | .github
-💾 .sc | .repo | .script
-╚═══════════════════════════╝
+
+✏️ .neon
+✏️ .glitch
+✏️ .fire
+✏️ .ice 
+✏️ .snow
+✏️ .matrix
+✏️ .hacker 
+✏️ .devil
+✏️ .sand
+╚═══════════════🌹════════════╝
+╔═══════════════🌹════════════╗
+⚙️ *SYSTEM* ⚙️
+
+💻 .git 
+💻 .github
+💻 .sc 
+💻 .repo
+💻 .script
+╚═══════════════🌹════════════╝
 🌹 *rejoindre notre clan akatsuki!* 🥷
+
+
 🌹𝑩𝑶𝑻 𝑪𝑹É𝑬 𝑷𝑨𝑹 𝑺𝑯𝑨𝑫𝑶𝑾 𝑷𝑹𝑰𝑴𝑬 𝑻𝑬𝑪𝑯🌹
 `;
 
