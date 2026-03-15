@@ -9,8 +9,8 @@ async function helpCommand(sock, chatId, message) {
 👑 Owner: *${settings.botOwner || 'Dev SHADOW'}*
 📺 YouTube: ${global.ytch}
 
-💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
-
+🥷🥷🥷🥷🥷🥷🥷🥷🥷🥷🥷🥷🥷
+╔═══════════════════════════╗
 🚀 *GENERAL COMMANDS* 🚀
 🎯 .help | .menu
 🎯 .ping | .alive
@@ -21,7 +21,8 @@ async function helpCommand(sock, chatId, message) {
 🎯 .8ball | .groupinfo
 🎯 .staff | .vv
 🎯 .trt | .ss | .jid | .url
-
+╚═══════════════════════════╝
+╔═══════════════════════════╗
 🛡️ *ADMIN COMMANDS* 🛡️
 ⚔️ .ban | .kick | .warn
 ⚔️ .promote | .demote
@@ -31,7 +32,8 @@ async function helpCommand(sock, chatId, message) {
 ⚔️ .antilink | .antibadword
 ⚔️ .welcome | .goodbye
 ⚔️ .setgname | .setgpp
-
+╚═══════════════════════════╝
+╔═══════════════════════════╗
 🔒 *OWNER COMMANDS* 🔒
 👑 .mode <public/private>
 👑 .clearsession | .cleartmp
@@ -39,35 +41,40 @@ async function helpCommand(sock, chatId, message) {
 👑 .autostatus | .autoread
 👑 .anticall | .pmblocker
 👑 .setpp | .setmention
-
+╚═══════════════════════════╝
+╔═══════════════════════════╗
 🎨 *EDITING* 🎨
 🖌️ .sticker | .simage
 🖌️ .remini | .removebg
 🖌️ .blur | .crop | .meme
 🖌️ .take | .emojimix
 🖌️ .igs | .igsc
-
+╚═══════════════════════════╝
+╔═══════════════════════════╗
 🧠 *AI & GAMES* 🧠
 🤖 .gpt | .gemini
 🖼️ .imagine | .flux | .sora
 🎮 .tictactoe | .hangman
 🎮 .trivia | .truth | .dare
-
+╚═══════════════════════════╝
+╔═══════════════════════════╗
 📥 *DOWNLOADER* 📥
 ⬇️ .play | .song | .video
 ⬇️ .spotify | .ytmp4
 ⬇️ .instagram | .facebook
 ⬇️ .tiktok
-
+╚═══════════════════════════╝
+╔═══════════════════════════╗
 🔤 *TEXTMAKER* 🔤
 ✏️ .neon | .glitch | .fire
 ✏️ .ice | .snow | .matrix
 ✏️ .hacker | .devil | .sand
-
+╚═══════════════════════════╝
+╔═══════════════════════════╗
 💻 *SYSTEM* 💻
 💾 .git | .github
 💾 .sc | .repo | .script
-
+╚═══════════════════════════╝
 🌈✨ *Join our channel for updates!* ✨🌈
 💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
 `;
