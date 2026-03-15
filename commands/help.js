@@ -4,14 +4,14 @@ const path = require('path');
 
 async function helpCommand(sock, chatId, message) {
     const helpMessage = `
-🌟✨ *WELCOME TO ${settings.botName || 'AKATSUKI-MD'}* ✨🌟
+🌹 *BIENVENU DANS ${settings.botName || '∘̥⃟☠️𝑬𝑴𝑷𝑰𝑹𝑬 𝑨𝑲𝑨𝑻𝑺𝑼𝑲𝑰☠️∘̥⃟'}* 🌹
 🛠 Version: *${settings.version || '3.0.0'}*
 👑 Owner: *${settings.botOwner || 'Dev SHADOW'}*
 📺 YouTube: ${global.ytch}
 
-🥷🥷🥷🥷🥷🥷🥷🥷🥷🥷🥷🥷🥷
+🦄𝑴𝑬𝑵𝑼 𝑬𝑴𝑷𝑰𝑹𝑬 𝑨𝑲𝑨𝑻𝑺𝑼𝑲𝑰🥷
 ╔═══════════════════════════╗
-🚀 *GENERAL COMMANDS* 🚀
+🦋 *GENERAL AKATSUKI* 🦋
 🎯 .help | .menu
 🎯 .ping | .alive
 🎯 .tts <text> | .owner
@@ -23,7 +23,7 @@ async function helpCommand(sock, chatId, message) {
 🎯 .trt | .ss | .jid | .url
 ╚═══════════════════════════╝
 ╔═══════════════════════════╗
-🛡️ *ADMIN COMMANDS* 🛡️
+🦄 *ADMIN AKATSUKI* 🦄
 ⚔️ .ban | .kick | .warn
 ⚔️ .promote | .demote
 ⚔️ .mute | .unmute
@@ -34,7 +34,7 @@ async function helpCommand(sock, chatId, message) {
 ⚔️ .setgname | .setgpp
 ╚═══════════════════════════╝
 ╔═══════════════════════════╗
-🔒 *OWNER COMMANDS* 🔒
+🔒 *OWNER AKATSUKI* 🔒
 👑 .mode <public/private>
 👑 .clearsession | .cleartmp
 👑 .update | .settings
@@ -75,8 +75,8 @@ async function helpCommand(sock, chatId, message) {
 💾 .git | .github
 💾 .sc | .repo | .script
 ╚═══════════════════════════╝
-🌈✨ *Join our channel for updates!* ✨🌈
-💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
+🌹 *rejoindre notre clan akatsuki!* 🥷
+🌹𝑩𝑶𝑻 𝑪𝑹É𝑬 𝑷𝑨𝑹 𝑺𝑯𝑨𝑫𝑶𝑾 𝑷𝑹𝑰𝑴𝑬 𝑻𝑬𝑪𝑯🌹
 `;
 
     try {
