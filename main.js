@@ -197,7 +197,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
 
             if (buttonId === 'channel') {
                 await sock.sendMessage(chatId, {
-                    text: '📢 *Join our Channel:*\nhttps://whatsapp.com/channel/0029VbBx6Qr3GJOpmxcy6Y1x'
+                    text: '📢 *Join our Channel:*\https://whatsapp.com/channel/0029VbBx6Qr3GJOpmxcy6Y1x'
                 }, { quoted: message });
                 return;
             } else if (buttonId === 'owner') {
