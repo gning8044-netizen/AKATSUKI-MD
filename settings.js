@@ -1,9 +1,9 @@
 const settings = {
-  packname: 'AKATSUKI MD',
+  packname: '𝐒𝐏𝐈𝐃𝐄𝐑 𝐌𝐀𝐍-𝐌𝐃',
   author: 'SHADOW',
-  botName: "AKATSUKI MD",
+  botName: "𝐒𝐏𝐈𝐃𝐄𝐑 𝐌𝐀𝐍-𝐌𝐃",
   botOwner: 'SHADOW TECH', // Your name
-  ownerNumber: '221766297256', //Set your number here without + symbol, just add country code & number without any space
+  ownerNumber: '221763221700', //Set your number here without + symbol, just add country code & number without any space
   giphyApiKey: 'qnl7ssQChTdPjsKta2Ax2LMaGXz303tq',
   commandMode: "private",
   maxStoreMessages: 20, 
