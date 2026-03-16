@@ -23,12 +23,12 @@ async function pingCommand(sock, chatId, message) {
         const speed = end - start;
 
         const response = `
-╭━━━〔 ⚡ 𝐀𝐊𝐀𝐓𝐒𝐔𝐊𝐈_𝐌𝐃 STATUS 〕━━━╮
-┃ 🏓 Speed     : ${speed} ms
-┃ ⏳ Uptime    : ${uptime}
-┃ 🧠 RAM       : ${freeMem}MB / ${totalMem}MB
-┃ 💻 Platform  : ${os.platform()}
-┃ 🔖 Version   : v${settings.version}
+╭━━━〔 ⚡ 𝐒𝐏𝐈𝐃𝐄𝐑 𝐌𝐀𝐍-𝐌𝐃 STATUS 〕━━━╮
+┃ 🕷️ Speed     : ${speed} ms
+┃ 🕷️ Uptime    : ${uptime}
+┃ 🕷️ RAM       : ${freeMem}MB / ${totalMem}MB
+┃ 🕷️ Platform  : ${os.platform()}
+┃ 🕷️ Version   : v${settings.version}
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 `.trim();
 
