@@ -156,7 +156,7 @@ const channelInfo = {
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
             newsletterJid: '120363423792937578@newsletter',
-            newsletterName: 'AKATSUKI MD',
+            newsletterName: 'SPIDER MAN MD',
             serverMessageId: -1
         }
     }
