@@ -28,13 +28,13 @@ async function handleAntilinkCommand(sock, chatId, userMessage, senderId, isSend
                 }
                 const result = await setAntilink(chatId, 'on', 'delete');
                 await sock.sendMessage(chatId, { 
-                    text: result ? '*_Antilink akatsuki ON_*' : '*_Failed to turn on Antilink_*' 
+                    text: result ? '*_Antilink Spider Man ON_*' : '*_Failed to turn on Antilink_*' 
                 },{ quoted: message });
                 break;
 
             case 'off':
                 await removeAntilink(chatId, 'on');
-                await sock.sendMessage(chatId, { text: '*_Antilink akatsuki OFF_*' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: '*_Antilink Spider Man OFF_*' }, { quoted: message });
                 break;
 
             case 'set':
