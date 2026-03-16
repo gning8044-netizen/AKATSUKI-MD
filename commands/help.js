@@ -4,48 +4,48 @@ const path = require('path');
 
 async function helpCommand(sock, chatId, message) {
     const helpMessage = `
-🌹 *BIENVENU DANS ${settings.botName || 'EMPIRE AKATSUKI'}* 🌹
+🕷️ *BIENVENU DANS ${settings.botName || 'BOT SPIDER MAN AKATSUKI'}* 🕷️
 🛠 Version: *${settings.version || '3.0.0'}*
 👑 Owner: *${settings.botOwner || 'Dev SHADOW'}*
 📺 YouTube: ${global.ytch}
 
-🦄𝑴𝑬𝑵𝑼 𝑬𝑴𝑷𝑰𝑹𝑬 𝑨𝑲𝑨𝑻𝑺𝑼𝑲𝑰🥷
-╔═════════════🥷══════════════╗
-🦋 *GENERAL AKATSUKI* 🦋
+🕷️𝑴𝑬𝑵𝑼 𝐒𝐏𝐈𝐃𝐄𝐑 𝐌𝐀𝐍-𝐌𝐃🕷️
+╔═══════════════════════════╗
+🕷️ *SPIDER MAN* 🕷️
 
-🎯 .help 
+🎯 .help
 🎯 .menu
-🎯 .ping 
+🎯 .ping
 🎯 .alive
-🎯 .tts <text> 
+🎯 .tts <text>
 🎯 .owner
 🎯 .joke 
 🎯 .quote
 🎯 .fact
 🎯 .weather
 🎯 .news
-🎯 .attp 
+🎯 .attp
 🎯 .lyrics
-🎯 .8ball 
+🎯 .8ball
 🎯 .groupinfo
-🎯 .staff 
+🎯 .staff
 🎯 .vv
 🎯 .trt
 🎯 .ss
 🎯 .jid
 🎯 .url
-╚═════════════🥷══════════════╝
-╔═════════════🥷══════════════╗
-🦄 *ADMIN AKATSUKI* 🦄
+╚═══════════════════════════╝
+╔═══════════════════════════╗
+🕷️ *SPIDER MAN* 🕷️
 
-⚔️ .ban 
+⚔️ .ban
 ⚔️ .kick
 ⚔️ .warn
 ⚔️ .promote
 ⚔️ .demote
-⚔️ .mute 
+⚔️ .mute
 ⚔️ .unmute
-⚔️ .delete 
+⚔️ .delete
 ⚔️ .clear
 ⚔️ .tagall 
 ⚔️ .hidetag
@@ -55,9 +55,9 @@ async function helpCommand(sock, chatId, message) {
 ⚔️ .goodbye
 ⚔️ .setgname
 ⚔️ .setgpp
-╚═════════════🥷══════════════╝
-╔═════════════🥷══════════════╗
-🔒 *OWNER AKATSUKI* 🔒
+╚═══════════════════════════╝
+╔═══════════════════════════╗
+🕷️ *SPIDER MAN* 🕷️
 
 👑 .mode <public/private>
 👑 .clearsession 
@@ -70,9 +70,9 @@ async function helpCommand(sock, chatId, message) {
 👑 .pmblocker
 👑 .setpp 
 👑 .setmention
-╚═════════════🥷══════════════╝
-╔═════════════🥷══════════════╗
-🎨 *EDITING* 🎨
+╚═══════════════════════════╝
+╔═══════════════════════════╗
+🕷️ *SPIDER MAN* 🕷️
 
 🎨 .sticker 
 🎨 .simage
@@ -85,9 +85,9 @@ async function helpCommand(sock, chatId, message) {
 🎨 .emojimix
 🎨 .igs
 🎨 .igsc
-╚══════════════🌹═════════════╝
-╔══════════════🌹═════════════╗
-🧠 *AI & GAMES* 🧠
+╚═══════════════════════════╝
+╔═══════════════════════════╗
+🕷️ *SPIDER MAN* 🕷️
 
 🤖 .gpt 
 🤖 .gemini
@@ -99,9 +99,9 @@ async function helpCommand(sock, chatId, message) {
 🎮 .trivia 
 🎮 .truth
 🎮 .dare
-╚═════════════🌹══════════════╝
-╔═════════════🌹══════════════╗
-📥 *DOWNLOADER* 📥
+╚═══════════════════════════╝
+╔═══════════════════════════╗
+🕷️ *SPIDER MAN* 🕷️
 
 📁 .play 
 📁 .song
@@ -111,9 +111,9 @@ async function helpCommand(sock, chatId, message) {
 📁 .instagram 
 📁 .facebook
 📁 .tiktok
-╚══════════════🌹═════════════╝
-╔══════════════🌹═════════════╗
-🔤 *TEXTMAKER* 🔤
+╚═══════════════════════════╝
+╔═══════════════════════════╗
+🕷️ *SPIDER MAN* 🕷️
 
 ✏️ .neon
 ✏️ .glitch
@@ -124,20 +124,20 @@ async function helpCommand(sock, chatId, message) {
 ✏️ .hacker 
 ✏️ .devil
 ✏️ .sand
-╚═══════════════🌹════════════╝
-╔═══════════════🌹════════════╗
-⚙️ *SYSTEM* ⚙️
+╚═══════════════════════════╝
+╔═══════════════════════════╗
+🕷️ *SPIDER MAN* 🕷️
 
 💻 .git 
 💻 .github
 💻 .sc 
 💻 .repo
 💻 .script
-╚═══════════════🌹════════════╝
-🌹 *rejoindre notre clan akatsuki!* 🥷
+╚═══════════════════════════╝
+🕷️ *Bot Spider Man Akatsuki!* 🕷️
 
 
-🌹𝑩𝑶𝑻 𝑪𝑹É𝑬 𝑷𝑨𝑹 𝑺𝑯𝑨𝑫𝑶𝑾 𝑷𝑹𝑰𝑴𝑬 𝑻𝑬𝑪𝑯🌹
+🕷️𝑩𝑶𝑻 𝑪𝑹É𝑬 𝑷𝑨𝑹 𝑺𝑯𝑨𝑫𝑶𝑾 𝑷𝑹𝑰𝑴𝑬 𝑻𝑬𝑪𝑯🕷️
 `;
 
     try {
