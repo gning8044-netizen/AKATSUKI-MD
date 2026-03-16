@@ -6,4 +6,4 @@ gr<div align="center">
 🌹SPIDER MAN-MD🥷
 </h1>
 
-<img src="https://files.catbox.moe/dczsqk.jpg" width="160" style="border-radius:20px; box-shadow:0 0 40px #00ffea;" />
+<img src="https://files.catbox.moe/m9y3km.jpg" width="160" style="border-radius:20px; box-shadow:0 0 40px #00ffea;" />
