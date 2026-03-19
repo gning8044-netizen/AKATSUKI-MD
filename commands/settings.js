@@ -1,5 +1,11 @@
 const fs = require('fs');
 
+/**
+ * 🤖 DEV SHADOW TECH - SETTINGS COMMAND
+ * ⚙️ Affiche tous les paramètres du bot
+ * 🕷️ Version 3.0.0
+ */
+
 function readJsonSafe(path, fallback) {
     try {
         const txt = fs.readFileSync(path, 'utf8');
@@ -16,14 +22,34 @@ async function settingsCommand(sock, chatId, message) {
         const senderId = message.key.participant || message.key.remoteJid;
         const isOwner = await isOwnerOrSudo(senderId, sock, chatId);
         
+        // Vérification si l'utilisateur est le propriétaire
         if (!message.key.fromMe && !isOwner) {
-            await sock.sendMessage(chatId, { text: 'Only bot owner can use this command!' }, { quoted: message });
+            const ownerOnlyMsg = `
+╔══════════════════════════════════╗
+║        ⛔ *ACCÈS REFUSÉ* ⛔        ║
+╠══════════════════════════════════╣
+║                                   ║
+║  👑 Seul le propriétaire du bot   ║
+║  peut utiliser cette commande.    ║
+║                                   ║
+║  🔹 Contactez : @${senderId.split('@')[0]} ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+╚══════════════════════════════════╝`;
+            
+            await sock.sendMessage(chatId, { 
+                text: ownerOnlyMsg,
+                mentions: [senderId]
+            }, { quoted: message });
             return;
         }
 
         const isGroup = chatId.endsWith('@g.us');
         const dataDir = './data';
 
+        // Lecture de tous les fichiers de configuration
         const mode = readJsonSafe(`${dataDir}/messageCount.json`, { isPublic: true });
         const autoStatus = readJsonSafe(`${dataDir}/autoStatus.json`, { enabled: false });
         const autoread = readJsonSafe(`${dataDir}/autoread.json`, { enabled: false });
@@ -35,7 +61,7 @@ async function settingsCommand(sock, chatId, message) {
         });
         const autoReaction = Boolean(userGroupData.autoReaction);
 
-        // Per-group features
+        // Paramètres spécifiques au groupe
         const groupId = isGroup ? chatId : null;
         const antilinkOn = groupId ? Boolean(userGroupData.antilink && userGroupData.antilink[groupId]) : false;
         const antibadwordOn = groupId ? Boolean(userGroupData.antibadword && userGroupData.antibadword[groupId]) : false;
@@ -44,48 +70,86 @@ async function settingsCommand(sock, chatId, message) {
         const chatbotOn = groupId ? Boolean(userGroupData.chatbot && userGroupData.chatbot[groupId]) : false;
         const antitagCfg = groupId ? (userGroupData.antitag && userGroupData.antitag[groupId]) : null;
 
-        const lines = [];
-        lines.push('*BOT SETTINGS*');
-        lines.push('');
-        lines.push(`• Mode: ${mode.isPublic ? 'Public' : 'Private'}`);
-        lines.push(`• Auto Status: ${autoStatus.enabled ? 'ON' : 'OFF'}`);
-        lines.push(`• Autoread: ${autoread.enabled ? 'ON' : 'OFF'}`);
-        lines.push(`• Autotyping: ${autotyping.enabled ? 'ON' : 'OFF'}`);
-        lines.push(`• PM Blocker: ${pmblocker.enabled ? 'ON' : 'OFF'}`);
-        lines.push(`• Anticall: ${anticall.enabled ? 'ON' : 'OFF'}`);
-        lines.push(`• Auto Reaction: ${autoReaction ? 'ON' : 'OFF'}`);
+        // Construction du message avec bordures
+        let settingsMsg = `
+╔══════════════════════════════════╗
+║     ⚙️ *DEV SHADOW TECH* ⚙️       ║
+║        📋 *PARAMÈTRES*            ║
+╠══════════════════════════════════╣
+║                                   ║
+║  ⚡ *CONFIGURATION GÉNÉRALE*       ║
+║                                   ║
+║  🟢 Mode        : ${mode.isPublic ? 'PUBLIC 🌍' : 'PRIVÉ 🔒'}
+║  📝 Auto Status : ${autoStatus.enabled ? 'ACTIF ✅' : 'INACTIF ❌'}
+║  👁️ Autoread    : ${autoread.enabled ? 'ACTIF ✅' : 'INACTIF ❌'}
+║  ⌨️ Autotyping  : ${autotyping.enabled ? 'ACTIF ✅' : 'INACTIF ❌'}
+║  🚫 PM Blocker  : ${pmblocker.enabled ? 'ACTIF ✅' : 'INACTIF ❌'}
+║  📞 Anticall    : ${anticall.enabled ? 'ACTIF ✅' : 'INACTIF ❌'}
+║  🔄 Auto Réaction: ${autoReaction ? 'ACTIF ✅' : 'INACTIF ❌'}
+║                                   ║`;
+
         if (groupId) {
-            lines.push('');
-            lines.push(`Group: ${groupId}`);
-            if (antilinkOn) {
-                const al = userGroupData.antilink[groupId];
-                lines.push(`• Antilink: ON (action: ${al.action || 'delete'})`);
-            } else {
-                lines.push('• Antilink: OFF');
-            }
-            if (antibadwordOn) {
-                const ab = userGroupData.antibadword[groupId];
-                lines.push(`• Antibadword: ON (action: ${ab.action || 'delete'})`);
-            } else {
-                lines.push('• Antibadword: OFF');
-            }
-            lines.push(`• Welcome: ${welcomeOn ? 'ON' : 'OFF'}`);
-            lines.push(`• Goodbye: ${goodbyeOn ? 'ON' : 'OFF'}`);
-            lines.push(`• Chatbot: ${chatbotOn ? 'ON' : 'OFF'}`);
-            if (antitagCfg && antitagCfg.enabled) {
-                lines.push(`• Antitag: ON (action: ${antitagCfg.action || 'delete'})`);
-            } else {
-                lines.push('• Antitag: OFF');
-            }
+            const alAction = antilinkOn ? userGroupData.antilink[groupId]?.action || 'delete' : '';
+            const abAction = antibadwordOn ? userGroupData.antibadword[groupId]?.action || 'delete' : '';
+            
+            settingsMsg += `
+╠══════════════════════════════════╣
+║  👥 *CONFIGURATION GROUPE*       ║
+║                                   ║
+║  📌 *Groupe ID:*                  ║
+║  ${groupId.substring(0, 30)}...   ║
+║                                   ║
+║  🔗 Antilink    : ${antilinkOn ? 'ACTIF ✅' : 'INACTIF ❌'} ${antilinkOn ? `[⚔️ ${alAction}]` : ''}
+║  🚫 Antibadword : ${antibadwordOn ? 'ACTIF ✅' : 'INACTIF ❌'} ${antibadwordOn ? `[⚔️ ${abAction}]` : ''}
+║  👋 Welcome     : ${welcomeOn ? 'ACTIF ✅' : 'INACTIF ❌'}
+║  👋 Goodbye     : ${goodbyeOn ? 'ACTIF ✅' : 'INACTIF ❌'}
+║  🤖 Chatbot     : ${chatbotOn ? 'ACTIF ✅' : 'INACTIF ❌'}
+║  🚫 Antitag     : ${(antitagCfg && antitagCfg.enabled) ? 'ACTIF ✅' : 'INACTIF ❌'} ${(antitagCfg && antitagCfg.enabled) ? `[⚔️ ${antitagCfg.action || 'delete'}]` : ''}
+║                                   ║`;
         } else {
-            lines.push('');
-            lines.push('Note: Per-group settings will be shown when used inside a group.');
+            settingsMsg += `
+╠══════════════════════════════════╣
+║  ℹ️ *NOTE*                        ║
+║                                   ║
+║  Les paramètres de groupe         ║
+║  sont visibles uniquement         ║
+║  depuis un groupe.                ║
+║                                   ║
+║  🔹 Utilisez cette commande        ║
+║     dans un groupe pour voir       ║
+║     les options spécifiques.       ║
+║                                   ║`;
         }
 
-        await sock.sendMessage(chatId, { text: lines.join('\n') }, { quoted: message });
+        settingsMsg += `
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+║  🤖 *Bot WhatsApp 150+ commandes* ║
+║  ⚙️ Version 3.0.0                 ║
+╚══════════════════════════════════╝`;
+
+        await sock.sendMessage(chatId, { text: settingsMsg }, { quoted: message });
+
     } catch (error) {
-        console.error('Error in settings command:', error);
-        await sock.sendMessage(chatId, { text: 'Failed to read settings.' }, { quoted: message });
+        console.error('❌ Erreur dans settings command:', error);
+        
+        const errorMsg = `
+╔══════════════════════════════════╗
+║        ❌ *ERREUR* ❌              ║
+╠══════════════════════════════════╣
+║                                   ║
+║  Impossible de lire les           ║
+║  paramètres du bot.               ║
+║                                   ║
+║  Veuillez réessayer plus tard.    ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+╚══════════════════════════════════╝`;
+        
+        await sock.sendMessage(chatId, { text: errorMsg }, { quoted: message });
     }
 }
 
