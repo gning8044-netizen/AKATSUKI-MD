@@ -1,42 +1,148 @@
 const isAdmin = require('../lib/isAdmin');
 
+/**
+ * 🤖 DEV SHADOW TECH - MUTE COMMAND
+ * 🔇 Commande pour fermer/ouvrir le groupe
+ * 🕷️ Version 3.0.0
+ */
+
 async function muteCommand(sock, chatId, senderId, message, durationInMinutes) {
     
-
     const { isSenderAdmin, isBotAdmin } = await isAdmin(sock, chatId, senderId);
+    
+    // Vérification si le bot est admin
     if (!isBotAdmin) {
-        await sock.sendMessage(chatId, { text: 'Please make the bot an admin first.' }, { quoted: message });
+        const botAdminMsg = `
+╔══════════════════════════════════╗
+║        ⚠️ *ATTENTION* ⚠️          ║
+╠══════════════════════════════════╣
+║                                   ║
+║  🤖 Le bot doit être admin        ║
+║  pour utiliser cette commande.    ║
+║                                   ║
+║  🔹 Faites .promote @bot           ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+╚══════════════════════════════════╝`;
+        await sock.sendMessage(chatId, { text: botAdminMsg }, { quoted: message });
         return;
     }
 
+    // Vérification si l'utilisateur est admin
     if (!isSenderAdmin) {
-        await sock.sendMessage(chatId, { text: 'Only group admins can use the mute command.' }, { quoted: message });
+        const adminOnlyMsg = `
+╔══════════════════════════════════╗
+║        ⛔ *ACCÈS REFUSÉ* ⛔        ║
+╠══════════════════════════════════╣
+║                                   ║
+║  👑 Seuls les administrateurs     ║
+║  du groupe peuvent utiliser       ║
+║  cette commande.                  ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+╚══════════════════════════════════╝`;
+        await sock.sendMessage(chatId, { text: adminOnlyMsg }, { quoted: message });
         return;
     }
 
     try {
-        // Mute the group
+        // Fermer le groupe (mute)
         await sock.groupSettingUpdate(chatId, 'announcement');
         
         if (durationInMinutes !== undefined && durationInMinutes > 0) {
             const durationInMilliseconds = durationInMinutes * 60 * 1000;
-            await sock.sendMessage(chatId, { text: `Spider man a ouvrire sa vie for ${durationInMinutes} minutes.` }, { quoted: message });
             
-            // Set timeout to unmute after duration
+            const muteMsg = `
+╔══════════════════════════════════╗
+║        🔇 *GROUPE FERMÉ* 🔇       ║
+╠══════════════════════════════════╣
+║                                   ║
+║  🕷️ *DEV SHADOW TECH* a fermé     ║
+║  le groupe pour *${durationInMinutes} minutes*. ║
+║                                   ║
+║  Seuls les admins peuvent         ║
+║  envoyer des messages.            ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  ⏱️ Réouverture automatique dans  ║
+║     ${durationInMinutes} minutes     ║
+╚══════════════════════════════════╝`;
+            
+            await sock.sendMessage(chatId, { text: muteMsg }, { quoted: message });
+            
+            // Programmer la réouverture automatique
             setTimeout(async () => {
                 try {
                     await sock.groupSettingUpdate(chatId, 'not_announcement');
-                    await sock.sendMessage(chatId, { text: 'Spider man a ouvrire sa vie.' });
+                    
+                    const unmuteMsg = `
+╔══════════════════════════════════╗
+║        🔊 *GROUPE OUVERT* 🔊       ║
+╠══════════════════════════════════╣
+║                                   ║
+║  🕷️ *DEV SHADOW TECH* a rouvert   ║
+║  le groupe.                       ║
+║                                   ║
+║  Tous les membres peuvent         ║
+║  à nouveau envoyer des messages.  ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+╚══════════════════════════════════╝`;
+                    
+                    await sock.sendMessage(chatId, { text: unmuteMsg });
                 } catch (unmuteError) {
-                    console.error('Error unmuting group:', unmuteError);
+                    console.error('❌ Erreur lors de la réouverture:', unmuteError);
                 }
             }, durationInMilliseconds);
+            
         } else {
-            await sock.sendMessage(chatId, { text: 'Spider man a fermé le group.' }, { quoted: message });
+            // Fermeture permanente (jusqu'à réouverture manuelle)
+            const mutePermanentMsg = `
+╔══════════════════════════════════╗
+║        🔇 *GROUPE FERMÉ* 🔇       ║
+╠══════════════════════════════════╣
+║                                   ║
+║  🕷️ *DEV SHADOW TECH* a fermé     ║
+║  le groupe.                       ║
+║                                   ║
+║  Seuls les admins peuvent         ║
+║  envoyer des messages.            ║
+║                                   ║
+║  🔹 Pour rouvrir : .unmute        ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+╚══════════════════════════════════╝`;
+            
+            await sock.sendMessage(chatId, { text: mutePermanentMsg }, { quoted: message });
         }
     } catch (error) {
-        console.error('Error muting/unmuting the group:', error);
-        await sock.sendMessage(chatId, { text: 'An error occurred while muting/unmuting the group. Please try again.' }, { quoted: message });
+        console.error('❌ Erreur lors de la fermeture/ouverture:', error);
+        
+        const errorMsg = `
+╔══════════════════════════════════╗
+║        ❌ *ERREUR* ❌              ║
+╠══════════════════════════════════╣
+║                                   ║
+║  Une erreur est survenue lors     ║
+║  de l'exécution de la commande.   ║
+║                                   ║
+║  Veuillez réessayer plus tard.    ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+╚══════════════════════════════════╝`;
+        
+        await sock.sendMessage(chatId, { text: errorMsg }, { quoted: message });
     }
 }
 
