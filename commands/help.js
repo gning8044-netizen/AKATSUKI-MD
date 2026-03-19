@@ -4,140 +4,168 @@ const path = require('path');
 
 async function helpCommand(sock, chatId, message) {
     const helpMessage = `
-🕷️ *BIENVENU DANS ${settings.botName || 'BOT SPIDER MAN AKATSUKI'}* 🕷️
-🛠 Version: *${settings.version || '3.0.0'}*
-👑 Owner: *${settings.botOwner || 'Dev SHADOW'}*
-📺 YouTube: ${global.ytch}
+╔══════════════════════════════════╗
+║     🕷️ *DEV SHADOW TECH* 🕷️      ║
+╠══════════════════════════════════╣
+║  🤖 *BIENVENU DANS ${settings.botName || 'BOT DEV SHADOW TECH'}*  
+║  🛠 Version: *${settings.version || '3.0.0'}*
+║  👑 Owner: *${settings.botOwner || 'Dev SHADOW'}*
+║  📺 YouTube: ${global.ytch}
+╚══════════════════════════════════╝
 
-🕷️𝑴𝑬𝑵𝑼 𝐒𝐏𝐈𝐃𝐄𝐑 𝐌𝐀𝐍-𝐌𝐃🕷️
-╔═══════════════════════════╗
-🕷️ *SPIDER MAN* 🕷️
+╔══════════════════════════════════╗
+║     🎯 *MENU DEV SHADOW TECH* 🎯  ║
+╠══════════════════════════════════╣
+║
+║  🎯 .help
+║  📋 .menu
+║  📶 .ping
+║  💚 .alive
+║  🔊 .tts <text>
+║  👑 .owner
+║  😄 .joke 
+║  💬 .quote
+║  📚 .fact
+║  🌤️ .weather
+║  📰 .news
+║  🎨 .attp
+║  🎵 .lyrics
+║  🎱 .8ball
+║  ℹ️ .groupinfo
+║  👥 .staff
+║  📸 .vv
+║  🌍 .trt
+║  📱 .ss
+║  🆔 .jid
+║  🔗 .url
+║
+╚══════════════════════════════════╝
 
-🎯 .help
-🎯 .menu
-🎯 .ping
-🎯 .alive
-🎯 .tts <text>
-🎯 .owner
-🎯 .joke 
-🎯 .quote
-🎯 .fact
-🎯 .weather
-🎯 .news
-🎯 .attp
-🎯 .lyrics
-🎯 .8ball
-🎯 .groupinfo
-🎯 .staff
-🎯 .vv
-🎯 .trt
-🎯 .ss
-🎯 .jid
-🎯 .url
-╚═══════════════════════════╝
-╔═══════════════════════════╗
-🕷️ *SPIDER MAN* 🕷️
+╔══════════════════════════════════╗
+║     ⚔️ *GROUPES DEV SHADOW* ⚔️    ║
+╠══════════════════════════════════╣
+║
+║  ⚔️ .ban
+║  👢 .kick
+║  ⚠️ .warn
+║  ⭐ .promote
+║  📉 .demote
+║  🔇 .mute
+║  🔊 .unmute
+║  🗑️ .delete
+║  🧹 .clear
+║  📢 .tagall 
+║  🤫 .hidetag
+║  🔗 .antilink 
+║  🚫 .antibadword
+║  👋 .welcome 
+║  👋 .goodbye
+║  ✏️ .setgname
+║  🖼️ .setgpp
+║
+╚══════════════════════════════════╝
 
-⚔️ .ban
-⚔️ .kick
-⚔️ .warn
-⚔️ .promote
-⚔️ .demote
-⚔️ .mute
-⚔️ .unmute
-⚔️ .delete
-⚔️ .clear
-⚔️ .tagall 
-⚔️ .hidetag
-⚔️ .antilink 
-⚔️ .antibadword
-⚔️ .welcome 
-⚔️ .goodbye
-⚔️ .setgname
-⚔️ .setgpp
-╚═══════════════════════════╝
-╔═══════════════════════════╗
-🕷️ *SPIDER MAN* 🕷️
+╔══════════════════════════════════╗
+║     👑 *OWNER DEV SHADOW* 👑      ║
+╠══════════════════════════════════╣
+║
+║  👑 .mode <public/private>
+║  🧹 .clearsession 
+║  🗑️ .cleartmp
+║  🔄 .update
+║  ⚙️ .settings
+║  📝 .autostatus 
+║  👁️ .autoread
+║  📞 .anticall 
+║  🚫 .pmblocker
+║  🖼️ .setpp 
+║  📌 .setmention
+║
+╚══════════════════════════════════╝
 
-👑 .mode <public/private>
-👑 .clearsession 
-👑 .cleartmp
-👑 .update
-👑 .settings
-👑 .autostatus 
-👑 .autoread
-👑 .anticall 
-👑 .pmblocker
-👑 .setpp 
-👑 .setmention
-╚═══════════════════════════╝
-╔═══════════════════════════╗
-🕷️ *SPIDER MAN* 🕷️
+╔══════════════════════════════════╗
+║     🎨 *STICKERS DEV SHADOW* 🎨   ║
+╠══════════════════════════════════╣
+║
+║  🎨 .sticker 
+║  🖼️ .simage
+║  ✨ .remini 
+║  🔍 .removebg
+║  🌫️ .blur 
+║  ✂️ .crop
+║  😂 .meme
+║  📝 .take 
+║  😊 .emojimix
+║  📷 .igs
+║  📸 .igsc
+║
+╚══════════════════════════════════╝
 
-🎨 .sticker 
-🎨 .simage
-🎨 .remini 
-🎨 .removebg
-🎨 .blur 
-🎨 .crop
-🎨 .meme
-🎨 .take 
-🎨 .emojimix
-🎨 .igs
-🎨 .igsc
-╚═══════════════════════════╝
-╔═══════════════════════════╗
-🕷️ *SPIDER MAN* 🕷️
+╔══════════════════════════════════╗
+║     🤖 *IA DEV SHADOW* 🤖         ║
+╠══════════════════════════════════╣
+║
+║  🧠 .gpt 
+║  ✨ .gemini
+║  🎨 .imagine
+║  🔥 .flux
+║  🎬 .sora
+║  🎮 .tictactoe
+║  😵 .hangman
+║  ❓ .trivia 
+║  🤫 .truth
+║  😈 .dare
+║
+╚══════════════════════════════════╝
 
-🤖 .gpt 
-🤖 .gemini
-🖼️ .imagine
-🖼️ .flux
-🖼️ .sora
-🎮 .tictactoe
-🎮 .hangman
-🎮 .trivia 
-🎮 .truth
-🎮 .dare
-╚═══════════════════════════╝
-╔═══════════════════════════╗
-🕷️ *SPIDER MAN* 🕷️
+╔══════════════════════════════════╗
+║     📥 *TÉLÉCHARGEMENTS* 📥       ║
+╠══════════════════════════════════╣
+║
+║  ▶️ .play 
+║  🎵 .song
+║  🎬 .video
+║  🎧 .spotify
+║  📹 .ytmp4
+║  📷 .instagram 
+║  📘 .facebook
+║  🎵 .tiktok
+║
+╚══════════════════════════════════╝
 
-📁 .play 
-📁 .song
-📁 .video
-📁 .spotify
-📁 .ytmp4
-📁 .instagram 
-📁 .facebook
-📁 .tiktok
-╚═══════════════════════════╝
-╔═══════════════════════════╗
-🕷️ *SPIDER MAN* 🕷️
+╔══════════════════════════════════╗
+║     ✨ *EFFETS TEXTES* ✨          ║
+╠══════════════════════════════════╣
+║
+║  💡 .neon
+║  📺 .glitch
+║  🔥 .fire
+║  ❄️ .ice 
+║  ☃️ .snow
+║  💻 .matrix
+║  👨‍💻 .hacker 
+║  😈 .devil
+║  🏖️ .sand
+║
+╚══════════════════════════════════╝
 
-✏️ .neon
-✏️ .glitch
-✏️ .fire
-✏️ .ice 
-✏️ .snow
-✏️ .matrix
-✏️ .hacker 
-✏️ .devil
-✏️ .sand
-╚═══════════════════════════╝
-╔═══════════════════════════╗
-🕷️ *SPIDER MAN* 🕷️
+╔══════════════════════════════════╗
+║     💻 *DEV COMMANDES* 💻         ║
+╠══════════════════════════════════╣
+║
+║  🐙 .git 
+║  🐱 .github
+║  📜 .sc 
+║  📦 .repo
+║  📝 .script
+║
+╚══════════════════════════════════╝
 
-💻 .git 
-💻 .github
-💻 .sc 
-💻 .repo
-💻 .script
-╚═══════════════════════════╝
-🕷️ *Bot Spider Man Akatsuki!* 🕷️
-
-
-🕷️𝑩𝑶𝑻 𝑪𝑹É𝑬 𝑷𝑨𝑹 𝑺𝑯𝑨𝑫𝑶𝑾 𝑷𝑹𝑰𝑴𝑬 𝑻𝑬𝑪𝑯🕷️
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+║  *BOT CRÉÉ PAR SHADOW PRIME*     ║
+║     🕷️ 150+ COMMANDES 🕷️         ║
+╚══════════════════════════════════╝
 `;
 
     try {
@@ -148,7 +176,7 @@ async function helpCommand(sock, chatId, message) {
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                 newsletterJid: '120363423792937578@newsletter',
-                newsletterName: 'AKATSUKI MD',
+                newsletterName: 'DEV SHADOW TECH',
                 serverMessageId: -1
             }
         };
