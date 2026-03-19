@@ -1,45 +1,137 @@
-const isAdmin = require('../lib/isAdmin');  // Move isAdmin to helpers
+const isAdmin = require('../lib/isAdmin');
+
+/**
+ * 🤖 DEV SHADOW TECH - TAGALL COMMAND
+ * 📢 Mentionne tous les membres du groupe
+ * 🕷️ Version 3.0.0
+ */
 
 async function tagAllCommand(sock, chatId, senderId, message) {
     try {
         const { isSenderAdmin, isBotAdmin } = await isAdmin(sock, chatId, senderId);
         
-
+        // Vérification si le bot est admin
         if (!isBotAdmin) {
-            await sock.sendMessage(chatId, { text: 'Please make the bot an admin first.' }, { quoted: message });
+            const botAdminMsg = `
+╔══════════════════════════════════╗
+║        ⚠️ *ATTENTION* ⚠️          ║
+╠══════════════════════════════════╣
+║                                   ║
+║  🤖 Le bot doit être admin        ║
+║  pour utiliser .tagall.           ║
+║                                   ║
+║  🔹 Faites .promote @bot           ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+╚══════════════════════════════════╝`;
+            
+            await sock.sendMessage(chatId, { text: botAdminMsg }, { quoted: message });
             return;
         }
 
+        // Vérification si l'utilisateur est admin
         if (!isSenderAdmin) {
-            await sock.sendMessage(chatId, { text: 'Only group admins can use the .tagall command.' }, { quoted: message });
+            const adminOnlyMsg = `
+╔══════════════════════════════════╗
+║        ⛔ *ACCÈS REFUSÉ* ⛔        ║
+╠══════════════════════════════════╣
+║                                   ║
+║  👑 Seuls les administrateurs     ║
+║  du groupe peuvent utiliser       ║
+║  la commande .tagall.             ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+╚══════════════════════════════════╝`;
+            
+            await sock.sendMessage(chatId, { text: adminOnlyMsg }, { quoted: message });
             return;
         }
 
-        // Get group metadata
+        // Récupérer les informations du groupe
         const groupMetadata = await sock.groupMetadata(chatId);
         const participants = groupMetadata.participants;
+        const groupName = groupMetadata.subject || 'Groupe';
+        const memberCount = participants.length;
 
         if (!participants || participants.length === 0) {
-            await sock.sendMessage(chatId, { text: 'No participants found in the group.' });
+            const noMembersMsg = `
+╔══════════════════════════════════╗
+║        ❌ *ERREUR* ❌              ║
+╠══════════════════════════════════╣
+║                                   ║
+║  Aucun membre trouvé dans         ║
+║  ce groupe.                       ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+╚══════════════════════════════════╝`;
+            
+            await sock.sendMessage(chatId, { text: noMembersMsg });
             return;
         }
 
-        // Create message with each member on a new line
-        let messageText = '🔊 *𝑬𝑴𝑷𝑰𝑹𝑬 𝑨𝑲𝑨𝑻𝑺𝑼𝑲𝑰:*\n\n';
-        participants.forEach(participant => {
-            messageText += `@${participant.id.split('@')[0]}\n`; // Add \n for new line
+        // Créer un message magnifique avec tous les membres
+        let headerMessage = `
+╔══════════════════════════════════╗
+║     📢 *DEV SHADOW TECH* 📢       ║
+║        👥 *MENTION DE TOUS*       ║
+╠══════════════════════════════════╣
+║                                   ║
+║  📌 *Groupe:* ${groupName.substring(0, 20)}${groupName.length > 20 ? '...' : ''}
+║  👤 *Total membres:* ${memberCount}
+║  👑 *Admin:* @${senderId.split('@')[0]}
+║                                   ║
+╠══════════════════════════════════╣
+║  📋 *LISTE DES MEMBRES:*          ║
+║                                   ║
+`;
+
+        let membersList = '';
+        participants.forEach((participant, index) => {
+            const isAdmin = participant.admin ? '👑' : '👤';
+            membersList += `  ${isAdmin} @${participant.id.split('@')[0]}\n`;
         });
 
-        // Send message with mentions
+        let footerMessage = `
+║                                   ║
+╠══════════════════════════════════╣
+║  ⚡ Message envoyé par            ║
+║  🕷️ *DEV SHADOW TECH*             ║
+╚══════════════════════════════════╝`;
+
+        const fullMessage = headerMessage + membersList + footerMessage;
+
+        // Envoyer le message avec toutes les mentions
         await sock.sendMessage(chatId, {
-            text: messageText,
+            text: fullMessage,
             mentions: participants.map(p => p.id)
         });
 
     } catch (error) {
-        console.error('Error in tagall command:', error);
-        await sock.sendMessage(chatId, { text: 'Failed to tag all members.' });
+        console.error('❌ Erreur dans tagall command:', error);
+        
+        const errorMsg = `
+╔══════════════════════════════════╗
+║        ❌ *ERREUR* ❌              ║
+╠══════════════════════════════════╣
+║                                   ║
+║  Impossible de mentionner         ║
+║  tous les membres.                ║
+║                                   ║
+║  Veuillez réessayer plus tard.    ║
+║                                   ║
+╚══════════════════════════════════╝
+╔══════════════════════════════════╗
+║  🕷️ *DEV SHADOW TECH* 🕷️         ║
+╚══════════════════════════════════╝`;
+        
+        await sock.sendMessage(chatId, { text: errorMsg });
     }
 }
 
-module.exports = tagAllCommand;  // Export directly
+module.exports = tagAllCommand;
